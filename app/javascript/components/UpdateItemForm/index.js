@@ -9,7 +9,9 @@ const UpdateItemForm = ({
   initialTitle,
   initialDescription,
   initialImageUrl,
-  onClose
+  onClose,
+  onErrors,
+  errors,
 }) => (
   <div className={cs.overlay}>
     <div className={cs.content}>
@@ -19,6 +21,7 @@ const UpdateItemForm = ({
             initialImageUrl={initialImageUrl}
             initialTitle={initialTitle}
             initialDescription={initialDescription}
+            errors={errors}
             buttonText="Update Item"
             loading={loading}
             onProcessItem={({ title, description, imageUrl }) => {
@@ -38,10 +41,13 @@ const UpdateItemForm = ({
                       __typename: "Item",
                       title,
                       description,
-                      imageUrl
-                    }
-                  }
-                }
+                      imageUrl,
+                    },
+                    errors: null,
+                  },
+                },
+              }).then(({ data }) => {
+                onErrors(data.updateItem.errors);
               });
               onClose();
             }}
