@@ -19,7 +19,7 @@ RSpec.describe Mutations::UpdateItemMutation do
   let(:mutation) do
     %(
       mutation UpdateItem($id: ID!, $title: String!, $description: String) {
-        updateItem(id: $id, title: $title, description: $description) {
+        updateItem(id: $id, attributes: {title: $title, description: $description}) {
           item {
             title
             }

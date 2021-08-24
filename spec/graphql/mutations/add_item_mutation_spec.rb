@@ -18,7 +18,7 @@ RSpec.describe Mutations::AddItemMutation do
   let(:mutation) do
     %(
       mutation AddItem($title: String!, $description: String) {
-        addItem(title: $title, description: $description) {
+        addItem(attributes: {title: $title, description: $description}) {
           item {
             title
             }
